@@ -1,0 +1,132 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{354133AC-BCF3-D899-2B8B-8AC70F2C4827}|Testfowm\\Testfowm.csproj|c:\\users\\sergei\\source\\repos\\testfowm\\testfowm\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354133AC-BCF3-D899-2B8B-8AC70F2C4827}|Testfowm\\Testfowm.csproj|solutionrelative:testfowm\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354133AC-BCF3-D899-2B8B-8AC70F2C4827}|Testfowm\\Testfowm.csproj|c:\\users\\sergei\\source\\repos\\testfowm\\testfowm\\connectarduino.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354133AC-BCF3-D899-2B8B-8AC70F2C4827}|Testfowm\\Testfowm.csproj|solutionrelative:testfowm\\connectarduino.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354133AC-BCF3-D899-2B8B-8AC70F2C4827}|Testfowm\\Testfowm.csproj|c:\\users\\sergei\\source\\repos\\testfowm\\testfowm\\connectcamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354133AC-BCF3-D899-2B8B-8AC70F2C4827}|Testfowm\\Testfowm.csproj|solutionrelative:testfowm\\connectcamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354133AC-BCF3-D899-2B8B-8AC70F2C4827}|Testfowm\\Testfowm.csproj|c:\\users\\sergei\\source\\repos\\testfowm\\testfowm\\test\\tester3.png||{177559E0-D141-11D0-92DF-00A0C9138C45}",
+      "RelativeMoniker": "D:0:0:{354133AC-BCF3-D899-2B8B-8AC70F2C4827}|Testfowm\\Testfowm.csproj|solutionrelative:testfowm\\test\\tester3.png||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354133AC-BCF3-D899-2B8B-8AC70F2C4827}|Testfowm\\Testfowm.csproj|C:\\Users\\Sergei\\source\\repos\\Testfowm\\testfowm\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{354133AC-BCF3-D899-2B8B-8AC70F2C4827}|Testfowm\\Testfowm.csproj|solutionrelative:testfowm\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354133AC-BCF3-D899-2B8B-8AC70F2C4827}|Testfowm\\Testfowm.csproj|c:\\users\\sergei\\source\\repos\\testfowm\\testfowm\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354133AC-BCF3-D899-2B8B-8AC70F2C4827}|Testfowm\\Testfowm.csproj|solutionrelative:testfowm\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{354133AC-BCF3-D899-2B8B-8AC70F2C4827}|Testfowm\\Testfowm.csproj|c:\\users\\sergei\\source\\repos\\testfowm\\testfowm\\pixelhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354133AC-BCF3-D899-2B8B-8AC70F2C4827}|Testfowm\\Testfowm.csproj|solutionrelative:testfowm\\pixelhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Tester3.png - PNG [1920x1080, 24-\u0440\u0430\u0437\u0440\u044F\u0434\u043D\u043E\u0435, PNG]",
+              "DocumentMoniker": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Test\\Tester3.png",
+              "RelativeDocumentMoniker": "Testfowm\\Test\\Tester3.png",
+              "ToolTip": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Test\\Tester3.png - PNG [1920x1080, 24-\u0440\u0430\u0437\u0440\u044F\u0434\u043D\u043E\u0435, PNG]",
+              "RelativeToolTip": "Testfowm\\Test\\Tester3.png - PNG [1920x1080, 24-\u0440\u0430\u0437\u0440\u044F\u0434\u043D\u043E\u0435, PNG]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2026-03-23T11:45:04.346Z",
+              "EditorCaption": " - PNG [1920x1080, 24-\u0440\u0430\u0437\u0440\u044F\u0434\u043D\u043E\u0435, PNG]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Program.cs",
+              "RelativeDocumentMoniker": "Testfowm\\Program.cs",
+              "ToolTip": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Program.cs",
+              "RelativeToolTip": "Testfowm\\Program.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAuwAsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T00:33:08.441Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PixelHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\PixelHandler.cs",
+              "RelativeDocumentMoniker": "Testfowm\\PixelHandler.cs",
+              "ToolTip": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\PixelHandler.cs",
+              "RelativeToolTip": "Testfowm\\PixelHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-31T21:16:49.751Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ConnectCamera.cs",
+              "DocumentMoniker": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\ConnectCamera.cs",
+              "RelativeDocumentMoniker": "Testfowm\\ConnectCamera.cs",
+              "ToolTip": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\ConnectCamera.cs",
+              "RelativeToolTip": "Testfowm\\ConnectCamera.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAwwAsAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T09:02:46.481Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ConnectArduino.cs",
+              "DocumentMoniker": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\ConnectArduino.cs",
+              "RelativeDocumentMoniker": "Testfowm\\ConnectArduino.cs",
+              "ToolTip": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\ConnectArduino.cs",
+              "RelativeToolTip": "Testfowm\\ConnectArduino.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-31T21:05:22.717Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "Testfowm\\Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Form1.Designer.cs",
+              "RelativeToolTip": "Testfowm\\Form1.Designer.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAYwHIAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-28T17:42:55.594Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Form1.cs",
+              "RelativeDocumentMoniker": "Testfowm\\Form1.cs",
+              "ToolTip": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "Testfowm\\Form1.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-28T17:42:44.766Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

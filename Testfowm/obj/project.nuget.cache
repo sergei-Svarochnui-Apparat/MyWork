@@ -1,0 +1,67 @@
+{
+  "version": 2,
+  "dgSpecHash": "2Cv0WgkvSUc=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Testfowm.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Sergei\\.nuget\\packages\\aforge\\2.2.5\\aforge.2.2.5.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\aforge.video\\2.2.5\\aforge.video.2.2.5.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\aforge.video.directshow\\2.2.5\\aforge.video.directshow.2.2.5.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\runtime.android-arm.runtime.native.system.io.ports\\10.0.2\\runtime.android-arm.runtime.native.system.io.ports.10.0.2.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\runtime.android-arm64.runtime.native.system.io.ports\\10.0.2\\runtime.android-arm64.runtime.native.system.io.ports.10.0.2.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\runtime.android-x64.runtime.native.system.io.ports\\10.0.2\\runtime.android-x64.runtime.native.system.io.ports.10.0.2.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\runtime.android-x86.runtime.native.system.io.ports\\10.0.2\\runtime.android-x86.runtime.native.system.io.ports.10.0.2.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\10.0.2\\runtime.linux-arm.runtime.native.system.io.ports.10.0.2.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\10.0.2\\runtime.linux-arm64.runtime.native.system.io.ports.10.0.2.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\runtime.linux-bionic-arm64.runtime.native.system.io.ports\\10.0.2\\runtime.linux-bionic-arm64.runtime.native.system.io.ports.10.0.2.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\runtime.linux-bionic-x64.runtime.native.system.io.ports\\10.0.2\\runtime.linux-bionic-x64.runtime.native.system.io.ports.10.0.2.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\runtime.linux-musl-arm.runtime.native.system.io.ports\\10.0.2\\runtime.linux-musl-arm.runtime.native.system.io.ports.10.0.2.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\runtime.linux-musl-arm64.runtime.native.system.io.ports\\10.0.2\\runtime.linux-musl-arm64.runtime.native.system.io.ports.10.0.2.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\runtime.linux-musl-x64.runtime.native.system.io.ports\\10.0.2\\runtime.linux-musl-x64.runtime.native.system.io.ports.10.0.2.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\runtime.linux-x64.runtime.native.system.io.ports\\10.0.2\\runtime.linux-x64.runtime.native.system.io.ports.10.0.2.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\runtime.maccatalyst-arm64.runtime.native.system.io.ports\\10.0.2\\runtime.maccatalyst-arm64.runtime.native.system.io.ports.10.0.2.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\runtime.maccatalyst-x64.runtime.native.system.io.ports\\10.0.2\\runtime.maccatalyst-x64.runtime.native.system.io.ports.10.0.2.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\runtime.native.system.io.ports\\10.0.2\\runtime.native.system.io.ports.10.0.2.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\runtime.osx-arm64.runtime.native.system.io.ports\\10.0.2\\runtime.osx-arm64.runtime.native.system.io.ports.10.0.2.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\runtime.osx-x64.runtime.native.system.io.ports\\10.0.2\\runtime.osx-x64.runtime.native.system.io.ports.10.0.2.nupkg.sha512",
+    "C:\\Users\\Sergei\\.nuget\\packages\\system.io.ports\\10.0.2\\system.io.ports.10.0.2.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "message": "Пакет \"AForge 2.2.5\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\", а не целевой платформы проекта \"net10.0-windows7.0\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "projectPath": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Testfowm.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Testfowm.csproj",
+      "libraryId": "AForge",
+      "targetGraphs": [
+        "net10.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "message": "Пакет \"AForge.Video 2.2.5\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\", а не целевой платформы проекта \"net10.0-windows7.0\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "projectPath": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Testfowm.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Testfowm.csproj",
+      "libraryId": "AForge.Video",
+      "targetGraphs": [
+        "net10.0-windows7.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "message": "Пакет \"AForge.Video.DirectShow 2.2.5\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1\", а не целевой платформы проекта \"net10.0-windows7.0\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "projectPath": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Testfowm.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Testfowm.csproj",
+      "libraryId": "AForge.Video.DirectShow",
+      "targetGraphs": [
+        "net10.0-windows7.0"
+      ]
+    }
+  ]
+}
