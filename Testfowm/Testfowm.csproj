@@ -10,11 +10,15 @@
 
   <ItemGroup>
     <Folder Include="MoreTest\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AForge.Video" Version="2.2.5" />
     <PackageReference Include="AForge.Video.DirectShow" Version="2.2.5" />
+    <PackageReference Include="Microsoft.ML" Version="5.0.0" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.27.0" />
+    <PackageReference Include="Microsoft.ML.OnnxTransformer" Version="5.0.0" />
     <PackageReference Include="System.IO.Ports" Version="10.0.2" />
   </ItemGroup>
 
