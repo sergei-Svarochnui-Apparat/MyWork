@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Testfowm.csproj": {}
+    "G:\\ProjectAiSensor\\MyWork\\Testfowm\\Testfowm.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Testfowm.csproj": {
+    "G:\\ProjectAiSensor\\MyWork\\Testfowm\\Testfowm.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Testfowm.csproj",
+        "projectUniqueName": "G:\\ProjectAiSensor\\MyWork\\Testfowm\\Testfowm.csproj",
         "projectName": "Testfowm",
-        "projectPath": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\Testfowm.csproj",
-        "packagesPath": "C:\\Users\\Sergei\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sergei\\source\\repos\\Testfowm\\Testfowm\\obj\\",
+        "projectPath": "G:\\ProjectAiSensor\\MyWork\\Testfowm\\Testfowm.csproj",
+        "packagesPath": "C:\\Users\\Sergius-1\\.nuget\\packages\\",
+        "outputPath": "G:\\ProjectAiSensor\\MyWork\\Testfowm\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Sergei\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Sergius-1\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -45,7 +41,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.200"
+        "SdkAnalysisLevel": "10.0.400"
       },
       "frameworks": {
         "net10.0-windows": {
@@ -96,7 +92,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.203/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.401/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

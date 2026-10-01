@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace Testfowm
@@ -14,7 +15,7 @@ namespace Testfowm
 
         public ConnectML()
         {
-            session = new InferenceSession("C:/Users/Sergei/source/repos/Testfowm/Testfowm/Models/yolov8n.onnx");//подключение модели ИИ
+            session = new InferenceSession("G:/ProjectAiSensor/MyWork/Testfowm/Models/yolov8n.onnx");//подключение модели ИИ
         }
 
         public List<ResultML> Detect(Bitmap bitmap)
