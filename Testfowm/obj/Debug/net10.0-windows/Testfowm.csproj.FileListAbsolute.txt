@@ -164,3 +164,4 @@ G:\ProjectAiSensor\MyWork\Testfowm\obj\Debug\net10.0-windows\refint\Testfowm.dll
 G:\ProjectAiSensor\MyWork\Testfowm\obj\Debug\net10.0-windows\Testfowm.pdb
 G:\ProjectAiSensor\MyWork\Testfowm\obj\Debug\net10.0-windows\Testfowm.genruntimeconfig.cache
 G:\ProjectAiSensor\MyWork\Testfowm\obj\Debug\net10.0-windows\ref\Testfowm.dll
+G:\ProjectAiSensor\MyWork\Testfowm\bin\Debug\net10.0-windows\Models\yolov8n.onnx

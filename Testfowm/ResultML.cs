@@ -1,21 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+namespace Testfowm;
 
-namespace Testfowm
+internal sealed record ResultML(RectangleF Bounds, float Confidence)
 {
-    class ResultML
-    {
-        public string Label { get; set; }
-
-        public float Confidence { get; set; }
-
-        public float X { get; set; }
-
-        public float Y { get; set; }
-
-        public float Width { get; set; }
-
-        public float Height { get; set; }
-    }
+    public PointF Center => new(Bounds.Left + Bounds.Width / 2, Bounds.Top + Bounds.Height / 2);
 }

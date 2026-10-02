@@ -1,5 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net10.0-windows</TargetFramework>
@@ -7,12 +6,6 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="MoreTest\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="AForge.Video" Version="2.2.5" />
     <PackageReference Include="AForge.Video.DirectShow" Version="2.2.5" />
@@ -21,5 +14,7 @@
     <PackageReference Include="Microsoft.ML.OnnxTransformer" Version="5.0.0" />
     <PackageReference Include="System.IO.Ports" Version="10.0.2" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Update="Models/yolov8n.onnx" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 </Project>
