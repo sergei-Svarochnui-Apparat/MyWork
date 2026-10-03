@@ -20,8 +20,26 @@ internal sealed class ConnectArduino : IDisposable
     private volatile RobotState? state;
     private volatile string? error;
     private long stateReceivedAt;
+    private volatile AuxServoState? auxState;
+    private long auxStateReceivedAt;
     public event Action? StateChanged;
     public event Action<RobotState>? StateReceived;
+    public event Action<AuxServoState>? AuxStateReceived;
+    public AuxServoState? AuxiliaryState => auxState;
+    public double AuxiliaryStateAgeMs
+    {
+        get
+        {
+            long stamp = Interlocked.Read(ref auxStateReceivedAt);
+            return stamp != 0 ? Stopwatch.GetElapsedTime(stamp).TotalMilliseconds : double.PositiveInfinity;
+        }
+    }
+
+    private void ClearAuxState()
+    {
+        auxState = null;
+        Interlocked.Exchange(ref auxStateReceivedAt, 0);
+    }
 
     public bool IsConnected => ready;
     public bool HasSession => port is not null;
@@ -42,6 +60,7 @@ internal sealed class ConnectArduino : IDisposable
         if (port is not null) throw new InvalidOperationException("Порт уже открыт.");
         error = null;
         state = null;
+        ClearAuxState();
         Interlocked.Exchange(ref stateReceivedAt, 0);
         ready = false;
         helloToken = Guid.NewGuid().ToString("N");
@@ -94,7 +113,7 @@ internal sealed class ConnectArduino : IDisposable
         }
     }
 
-    public async Task SendAsync(string action)
+    public async Task SendAsync(string action, TimeSpan? timeout = null)
     {
         if (!ready) throw new InvalidOperationException("Сначала подключи ESP32.");
         if (action.Contains('\n') || action.Contains('\r'))
@@ -107,7 +126,7 @@ internal sealed class ConnectArduino : IDisposable
         {
             error = null;
             WriteLine(id.ToString(CultureInfo.InvariantCulture) + " " + action);
-            await completed.Task.WaitAsync(TimeSpan.FromSeconds(5));
+            await completed.Task.WaitAsync(timeout ?? TimeSpan.FromSeconds(5));
         }
         catch (TimeoutException)
         {
@@ -131,12 +150,19 @@ internal sealed class ConnectArduino : IDisposable
                 if (line == "BOOT AISENSOR 1")
                 {
                     state = null;
+                    ClearAuxState();
                     if (ready) FailConnection("ESP32 перезапустился. Переподключи порт.");
                 }
                 else if (line == "READY AISENSOR 1 " + helloToken && hello is { Task.IsCompleted: false })
                 {
                     ready = true;
                     hello?.TrySetResult(true);
+                }
+                else if (AuxServoState.TryParse(line, out var parsedAux))
+                {
+                    auxState = parsedAux;
+                    Interlocked.Exchange(ref auxStateReceivedAt, Stopwatch.GetTimestamp());
+                    AuxStateReceived?.Invoke(parsedAux!);
                 }
                 else if (RobotState.TryParse(line, out var parsed))
                 {
@@ -170,6 +196,7 @@ internal sealed class ConnectArduino : IDisposable
     {
         "LIMIT" => "Команда выходит за тестовый диапазон сустава.",
         "NOT_ARMED" => "Сначала нажми «Включить приводы».",
+        "AUX_NOT_ENABLED" => "Сначала включи сервопривод D26.",
         "BUSY" => "Предыдущее движение ещё выполняется.",
         "CANCELLED" => "Движение остановлено.",
         "WATCHDOG" => "Движение остановлено из-за потери связи.",
@@ -181,6 +208,7 @@ internal sealed class ConnectArduino : IDisposable
         ready = false;
         error = message;
         state = null;
+        ClearAuxState();
         Interlocked.Exchange(ref stateReceivedAt, 0);
         foreach (var item in pending.Values) item.TrySetException(new IOException(message));
         hello?.TrySetException(new IOException(message));
@@ -209,6 +237,7 @@ internal sealed class ConnectArduino : IDisposable
         cancellation = null;
         reader = null;
         state = null;
+        ClearAuxState();
         Interlocked.Exchange(ref stateReceivedAt, 0);
         foreach (var item in pending.Values) item.TrySetException(new IOException("Порт закрыт."));
         hello = null;
@@ -218,6 +247,7 @@ internal sealed class ConnectArduino : IDisposable
     public void Dispose()
     {
         ready = false;
+        ClearAuxState();
         heartbeat?.Dispose();
         cancellation?.Cancel();
         lock (writeLock)

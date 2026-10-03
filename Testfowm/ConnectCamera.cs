@@ -29,10 +29,18 @@ internal sealed class ConnectCamera : IDisposable
         var source = new VideoCaptureDevice(moniker);
         var capabilities = source.VideoCapabilities;
         var preferred = capabilities
-            .Where(c => c.FrameSize.Width <= 1280 && c.FrameSize.Height <= 720)
-            .OrderByDescending(c => c.FrameSize.Width * c.FrameSize.Height)
+            .Where(c => c.FrameSize.Width == 800 && c.FrameSize.Height == 600)
+            .OrderByDescending(c => c.AverageFrameRate)
+            .FirstOrDefault() ?? capabilities
+            .Where(c => c.FrameSize.Width <= 800 && c.FrameSize.Height <= 600 &&
+                c.FrameSize.Width >= 320 && c.FrameSize.Height >= 240)
+            .OrderByDescending(c => c.AverageFrameRate >= 30)
+            .ThenByDescending(c => c.FrameSize.Width * c.FrameSize.Height)
             .ThenByDescending(c => c.AverageFrameRate)
-            .FirstOrDefault();
+            .FirstOrDefault() ?? capabilities
+                .OrderByDescending(c => c.AverageFrameRate)
+                .ThenBy(c => c.FrameSize.Width * c.FrameSize.Height)
+                .FirstOrDefault();
         if (preferred is not null)
             source.VideoResolution = preferred;
 
@@ -49,12 +57,13 @@ internal sealed class ConnectCamera : IDisposable
 
     private void NewFrameHandler(object sender, NewFrameEventArgs e)
     {
+        long acquiredAt = Stopwatch.GetTimestamp();
         var nextFrame = (Bitmap)e.Frame.Clone();
         lock (frameLock)
         {
             currentBitmap?.Dispose();
             currentBitmap = nextFrame;
-            capturedAt = Stopwatch.GetTimestamp();
+            capturedAt = acquiredAt;
             sequence++;
         }
     }
@@ -65,13 +74,13 @@ internal sealed class ConnectCamera : IDisposable
     }
 
     // Каждый читатель получает собственный кадр; очередь старых кадров отсутствует.
-    public Bitmap? GetBitmap(out long frameSequence, out long frameCapturedAt)
+    public Bitmap? GetBitmap(long previousSequence, out long frameSequence, out long frameCapturedAt)
     {
         lock (frameLock)
         {
             frameSequence = sequence;
             frameCapturedAt = capturedAt;
-            return currentBitmap is null ? null : (Bitmap)currentBitmap.Clone();
+            return currentBitmap is null || sequence == previousSequence ? null : (Bitmap)currentBitmap.Clone();
         }
     }
 

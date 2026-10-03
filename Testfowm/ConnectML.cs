@@ -14,6 +14,8 @@ internal sealed class ConnectML : IDisposable
     private readonly string[] outputNames;
     private readonly float[] inputBuffer = new float[3 * InputSize * InputSize];
     private readonly byte[] pixelBuffer = new byte[InputSize * InputSize * 3];
+    private readonly Bitmap resized;
+    private readonly long[] inputShape = { 1, 3, InputSize, InputSize };
 
     // Этот объект используется только одним фоновым обработчиком.
     public ConnectML(string modelPath)
@@ -29,6 +31,7 @@ internal sealed class ConnectML : IDisposable
         session = new InferenceSession(modelPath, options);
         try
         {
+            resized = new Bitmap(InputSize, InputSize, PixelFormat.Format24bppRgb);
             inputName = session.InputMetadata.Keys.Single();
             var dimensions = session.InputMetadata[inputName].Dimensions;
             if (dimensions.Length != 4 ||
@@ -42,6 +45,7 @@ internal sealed class ConnectML : IDisposable
         catch
         {
             session.Dispose();
+            resized?.Dispose();
             throw;
         }
     }
@@ -52,7 +56,7 @@ internal sealed class ConnectML : IDisposable
             throw new ArgumentOutOfRangeException(nameof(confidenceThreshold));
         var transform = PrepareInput(bitmap);
         using var input = OrtValue.CreateTensorValueFromMemory(
-            inputBuffer, new long[] { 1, 3, InputSize, InputSize });
+            inputBuffer, inputShape);
         using var runOptions = new RunOptions();
         using var output = session.Run(runOptions,
             new Dictionary<string, OrtValue> { [inputName] = input }, outputNames);
@@ -116,7 +120,6 @@ internal sealed class ConnectML : IDisposable
         int padX = (InputSize - scaledWidth) / 2;
         int padY = (InputSize - scaledHeight) / 2;
 
-        using var resized = new Bitmap(InputSize, InputSize, PixelFormat.Format24bppRgb);
         using (var graphics = Graphics.FromImage(resized))
         {
             graphics.Clear(Color.FromArgb(114, 114, 114));
@@ -161,5 +164,5 @@ internal sealed class ConnectML : IDisposable
         return totalArea > 0 ? sharedArea / totalArea : 0;
     }
 
-    public void Dispose() => session.Dispose();
+    public void Dispose() { session.Dispose(); resized.Dispose(); }
 }

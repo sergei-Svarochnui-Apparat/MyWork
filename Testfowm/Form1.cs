@@ -22,6 +22,8 @@ public partial class Form1 : Form
     private volatile float confidenceThreshold = .40f;
     private sealed record AimPosition(float X, float Y);
     private volatile AimPosition aimPosition = new(.5f, .5f);
+    private string AutoTrackingCaption => $"Авто {robotPanel.TrackingAxes} " +
+        (robotPanel.AutoTrackingEnabled ? "включено" : "выключено");
 
     private sealed record CameraChoice(string Name, string Moniker)
     {
@@ -131,6 +133,7 @@ public partial class Form1 : Form
             var token = cancellation.Token;
             detectionTask = Task.Run(() => DetectionLoopAsync(localDetector, token));
             previewTimer.Start();
+            robotPanel.RequestAutoTracking();
             startButton.Text = "Остановить камеру";
             statusLabel.Text = "Ожидание первого кадра…";
         }
@@ -152,10 +155,10 @@ public partial class Form1 : Form
         {
             while (!token.IsCancellationRequested)
             {
-                using var frame = camera.GetBitmap(out long sequence, out long capturedAt);
+                using var frame = camera.GetBitmap(lastSequence, out long sequence, out long capturedAt);
                 if (frame is null || sequence == lastSequence)
                 {
-                    await Task.Delay(10, token);
+                    await Task.Delay(5, token);
                     continue;
                 }
                 lastSequence = sequence;
@@ -166,8 +169,19 @@ public partial class Form1 : Form
                 var aimSquare = GetCenterSquare(frame.Size, new PointF(currentAim.X, currentAim.Y));
                 var target = tracker.Select(people, frame.Size, capturedAt,
                     new PointF(aimSquare.Left + aimSquare.Width / 2, aimSquare.Top + aimSquare.Height / 2));
-                snapshot = new DetectionSnapshot(people.ToArray(), target, frame.Size, capturedAt,
+                var result = new DetectionSnapshot(people.ToArray(), target, frame.Size, capturedAt,
                     Stopwatch.GetElapsedTime(startedAt).TotalMilliseconds);
+                snapshot = result;
+                var aim = new PointF(aimSquare.Left + aimSquare.Width / 2, aimSquare.Top + aimSquare.Height / 2);
+                // Наведение получает результат сразу после YOLO, независимо от таймера показа.
+                if (IsHandleCreated && !IsDisposed)
+                {
+                    BeginInvoke((Action)(() =>
+                    {
+                        if (!closing && !token.IsCancellationRequested && ReferenceEquals(snapshot, result))
+                            robotPanel.UpdateVision(result.Target?.Bounds, aim, result.FrameSize, result.CapturedAt);
+                    }));
+                }
             }
         }
         catch (OperationCanceledException) when (token.IsCancellationRequested) { }
@@ -180,7 +194,7 @@ public partial class Form1 : Form
 
     private void PreviewTimer_Tick(object? sender, EventArgs e)
     {
-        var frame = camera.GetBitmap(out long sequence, out long rawCapturedAt);
+        var frame = camera.GetBitmap(displayedSequence, out long sequence, out long rawCapturedAt);
         if (frame is null || sequence == displayedSequence)
         {
             frame?.Dispose();
@@ -189,7 +203,7 @@ public partial class Form1 : Form
                 Stopwatch.GetElapsedTime(rawCapturedAt).TotalMilliseconds > 1000)
             {
                 statusLabel.Text = "Новые кадры камеры не поступают.";
-                targetLabel.Text = "Координаты цели устарели. Автослежение выключено.";
+                targetLabel.Text = "Координаты цели устарели. " + AutoTrackingCaption;
             }
             return;
         }
@@ -214,6 +228,8 @@ public partial class Form1 : Form
             var greenSquare = GetCenterSquare(frame.Size, new PointF(currentAim.X, currentAim.Y));
             var aim = new PointF(greenSquare.Left + greenSquare.Width / 2,
                 greenSquare.Top + greenSquare.Height / 2);
+            robotPanel.UpdateVision(fresh ? current?.Target?.Bounds : null, aim, frame.Size,
+                fresh ? current!.CapturedAt : rawCapturedAt);
 
             using (var graphics = Graphics.FromImage(frame))
             using (var pen = new Pen(Color.Lime, 3))
@@ -232,22 +248,23 @@ public partial class Form1 : Form
                     }
                     if (current.Target is ResultML target)
                     {
-                        graphics.DrawLine(Pens.Cyan, aim.X, aim.Y,
-                            target.Center.X, target.Center.Y);
-                        bool aligned = target.Bounds.Contains(greenSquare);
-                        float dx = target.Center.X - aim.X;
-                        float dy = target.Center.Y - aim.Y;
-                        targetLabel.Text = $"Цель: {target.Confidence:P0} | ΔX: {dx:F0} px, ΔY: {dy:F0} px | " +
+                        var nearest = TargetAlignment.NearestPoint(target.Bounds, aim);
+                        graphics.DrawLine(Pens.Cyan, aim.X, aim.Y, nearest.X, nearest.Y);
+                        float dx = TargetAlignment.HorizontalError(target.Bounds, aim.X);
+                        float dy = -TargetAlignment.VerticalError(target.Bounds, aim.Y);
+                        bool aligned = TargetAlignment.IsReached(target.Bounds, aim);
+                        bool nearby = Math.Abs(dx) <= TargetAlignment.ResumeMargin && Math.Abs(dy) <= TargetAlignment.ResumeMargin;
+                        targetLabel.Text = $"Цель: {target.Confidence:P0} | До рамки ΔX: {dx:F0} px, ΔY: {dy:F0} px | " +
                             $"ошибка: {dx / (frame.Width / 2f):P0}, {dy / (frame.Height / 2f):P0} | " +
-                            (aligned ? "Зелёный квадрат внутри цели" : "Цель вне прицела") +
-                            " | Автослежение выключено";
+                            (aligned ? "Прицел в зоне попадания" : nearby ? "Прицел возле рамки" : "Наведение к рамке цели") +
+                            " | " + AutoTrackingCaption;
                     }
-                    else targetLabel.Text = "Цель потеряна — ожидание человека. Автослежение выключено.";
+                    else targetLabel.Text = "Цель потеряна — ожидание человека. " + AutoTrackingCaption;
                 }
                 else
                 {
-                    targetLabel.Text = current is null ? "Поиск человека… Автослежение выключено." :
-                        "Координаты цели устарели. Автослежение выключено.";
+                    targetLabel.Text = (current is null ? "Поиск человека… " : "Координаты цели устарели. ") +
+                        AutoTrackingCaption;
                 }
             }
 
@@ -267,7 +284,7 @@ public partial class Form1 : Form
 
     internal static RectangleF GetCenterSquare(Size frameSize, PointF normalizedCenter)
     {
-        float side = Math.Min(75, Math.Min(frameSize.Width, frameSize.Height));
+        float side = Math.Min(30, Math.Min(frameSize.Width, frameSize.Height));
         float centerX = Math.Clamp(normalizedCenter.X * frameSize.Width, side / 2, frameSize.Width - side / 2);
         float centerY = Math.Clamp(normalizedCenter.Y * frameSize.Height, side / 2, frameSize.Height - side / 2);
         return new RectangleF(centerX - side / 2, centerY - side / 2, side, side);
@@ -277,6 +294,8 @@ public partial class Form1 : Form
 
     private async Task StopCaptureAsync()
     {
+        await robotPanel.StopAutoTrackingAsync();
+        robotPanel.ClearVision();
         previewTimer.Stop();
         statusLabel.Text = "Остановка камеры…";
         cancellation?.Cancel();

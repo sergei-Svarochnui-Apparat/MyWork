@@ -9,7 +9,7 @@ internal sealed class RobotCalibrationJournal : IDisposable
 {
     private sealed record Entry(string Kind, DateTimeOffset TimeUtc, RobotState? State,
         bool Connected, string? Label = null, string? Note = null, string? Action = null,
-        string? Error = null, TaskCompletionSource<bool>? Saved = null);
+        string? Error = null, TaskCompletionSource<bool>? Saved = null, AuxServoState? Auxiliary = null);
     private readonly Channel<Entry> queue = Channel.CreateBounded<Entry>(new BoundedChannelOptions(256)
     {
         SingleReader = true, FullMode = BoundedChannelFullMode.Wait
@@ -31,6 +31,13 @@ internal sealed class RobotCalibrationJournal : IDisposable
 
     public void Connection(bool connected, string? message = null) => Enqueue(
         new("connection", DateTimeOffset.UtcNow, null, connected, Error: message));
+
+    public void ObserveAuxiliary(AuxServoState state, bool connected) => Enqueue(
+        new("aux-state", DateTimeOffset.UtcNow, null, connected, Auxiliary: state));
+
+    public void AuxiliaryCommand(string action, string phase, AuxServoState? state, bool connected, string? message = null) =>
+        Enqueue(new("aux-command-" + phase, DateTimeOffset.UtcNow, null, connected,
+            Action: action, Error: message, Auxiliary: state));
 
     public void Command(string action, string phase, RobotState? state, bool connected, string? message = null) =>
         Enqueue(new("command-" + phase, DateTimeOffset.UtcNow, state, connected, Action: action, Error: message));
@@ -61,6 +68,7 @@ internal sealed class RobotCalibrationJournal : IDisposable
                     sequence = ++sequence, kind = entry.Kind, timeUtc = entry.TimeUtc,
                     connected = entry.Connected, state = entry.State, label = entry.Label,
                     note = entry.Note, action = entry.Action, error = entry.Error,
+                    auxiliary = entry.Auxiliary,
                     contactConfirmedByUser = entry.Kind == "point" ? (bool?)true : null,
                     anglesAreCommanded = true
                 }, JsonOptions);
@@ -75,6 +83,12 @@ internal sealed class RobotCalibrationJournal : IDisposable
                     string temporaryPath = Path.Combine(DirectoryPath, "live.tmp");
                     await File.WriteAllTextAsync(temporaryPath, json, Encoding.UTF8);
                     File.Move(temporaryPath, Path.Combine(DirectoryPath, "live.json"), true);
+                }
+                if (entry.Kind == "aux-state" || entry.Kind == "connection" && !entry.Connected)
+                {
+                    string temporaryPath = Path.Combine(DirectoryPath, "live-aux.tmp");
+                    await File.WriteAllTextAsync(temporaryPath, json, Encoding.UTF8);
+                    File.Move(temporaryPath, Path.Combine(DirectoryPath, "live-aux.json"), true);
                 }
                 entry.Saved?.TrySetResult(true);
             }
